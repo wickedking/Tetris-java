@@ -222,6 +222,11 @@ public class Board {
 		return true;
 	}
 	
+	public boolean rotate(){
+		currentPiece = currentPiece.Rotate();
+		return true;
+	}
+	
 	//method to remove rows
 	
 
