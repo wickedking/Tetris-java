@@ -11,21 +11,12 @@ public class OPiece extends Piece{
 	}
 	
 	private static LocalPoint constructPiece(){
-		return null;
+		return new LocalPoint(new Point(0,0), new Point(0,1), new Point(1,1), new Point(1,0));
 	}
 
 	@Override
 	public Piece Rotate() {
-		if(super.my_rotation == Rotation.UP){
-			return new OPiece(super.my_location, Rotation.RIGHT);
-		} else if(super.my_rotation == Rotation.RIGHT){
-			return new OPiece(super.my_location, Rotation.DOWN);
-		} else if(super.my_rotation == Rotation.DOWN){
-			return new OPiece(super.my_location, Rotation.LEFT);
-		} else if(super.my_rotation == Rotation.LEFT){
-			return new OPiece(super.my_location, Rotation.UP);
-		}
-		return null;//TODO fix 
+		return this;
 	}
 
 }

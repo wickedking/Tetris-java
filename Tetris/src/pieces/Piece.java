@@ -32,18 +32,18 @@ public abstract class Piece {
 		my_point4 = the_local.LOCAL_4; 
 	}
 	
-	//TODO make sure createPiece is the right method.
-	public Piece moveDown(){
-		return PieceFactory.createPiece(my_name, my_location, my_rotation);
-	}
-	
-	public Piece moveLeft(){
-		return PieceFactory.createPiece(my_name, my_location, my_rotation);
-	}
-	
-	public Piece moveRight(){
-		return PieceFactory.createPiece(my_name, my_location, my_rotation);
-	}
+//	//TODO make sure createPiece is the right method.
+//	public Piece moveDown(){
+//		return PieceFactory.createPiece(my_name, my_location, my_rotation);
+//	}
+//	
+//	public Piece moveLeft(){
+//		return PieceFactory.createPiece(my_name, my_location, my_rotation);
+//	}
+//	
+//	public Piece moveRight(){
+//		return PieceFactory.createPiece(my_name, my_location, my_rotation);
+//	}
 	
 	public abstract Piece Rotate();
 

@@ -2,7 +2,11 @@ package board;
 
 import java.awt.Point;
 import java.util.ArrayList;
+
 import pieces.Piece;
+import pieces.PieceFactory;
+import pieces.PieceName;
+import pieces.Rotation;
 
 /**
  * The board class to hold the references to the pieces.
@@ -27,11 +31,14 @@ public class Board {
 	 */
 	private ArrayList<ArrayList<Piece>> my_board;
 	
+	private Piece currentPiece;
+	
 	/**
 	 * Default constructor
 	 */
 	public Board(){
 		createBoard();
+		currentPiece = PieceFactory.createPiece(PieceName.I, new Point(0, 0), Rotation.UP);
 	}
 	
 	/**
@@ -167,6 +174,21 @@ public class Board {
 		my_board.remove(the_row);
 		my_board.add(new ArrayList<Piece>(WIDTH));
 		return true;
+	}
+	
+	public boolean movePieceDown(){
+		return false;
+		//TODO
+	}
+	
+	public boolean movePieceLeft(){
+		//TODO
+		return false;
+	}
+	
+	public boolean movePieceRight(){
+		//TODO
+		return false;
 	}
 	
 	//method to remove rows
