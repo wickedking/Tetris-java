@@ -2,6 +2,7 @@ package board;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 
 import pieces.Piece;
 import pieces.PieceFactory;
@@ -15,6 +16,21 @@ import pieces.Rotation;
  *
  */
 public class Board {
+	
+	/**
+	 * An array of all the different types of pieces.
+	 */
+	private static final PieceName next_piece[] = {PieceName.I, PieceName.J, PieceName.L, PieceName.O, PieceName.S, PieceName.Z};
+	
+	/**
+	 * A reference to a random object. The actual random not just a random object.4
+	 */
+	private static final Random rand = new Random();
+	
+	/**
+	 * The start point for all new pieces. 
+	 */
+	private static final Point start_location = new Point(4,2);
 	
 	/**
 	 * The Height of the board
@@ -31,14 +47,14 @@ public class Board {
 	 */
 	private ArrayList<ArrayList<Piece>> my_board;
 	
-	private Piece currentPiece;
+	public Piece currentPiece;
 	
 	/**
 	 * Default constructor
 	 */
 	public Board(){
 		createBoard();
-		currentPiece = PieceFactory.createPiece(PieceName.I, new Point(0, 0), Rotation.UP);
+		currentPiece = PieceFactory.createPiece(PieceName.L, start_location, Rotation.UP);
 	}
 	
 	/**
@@ -64,31 +80,40 @@ public class Board {
 		if (!boundsCheck(location, the_piece.my_point1, the_piece.my_point2, the_piece.my_point3, the_piece.my_point4)){
 			return false;
 		}
-		Point check = location;
-		check.x = check.x + the_piece.my_point1.x;
-		check.y = check.y + the_piece.my_point1.y;
+		int x = location.x;
+		int y = location.y;
+		x = x + the_piece.my_point1.x;
+		y = y - the_piece.my_point1.y;
+
+		my_board.get(y).add(x, the_piece);
 		
-		my_board.get(check.y).add(check.x, the_piece);
+		x = location.x;
+		y = location.y;
+		x = x + the_piece.my_point2.x;
+		y = y - the_piece.my_point2.y;
 		
-		check = location;
-		check.x = check.x + the_piece.my_point2.x;
-		check.y = check.y + the_piece.my_point2.y;
+		my_board.get(y).add(x, the_piece);
 		
-		my_board.get(check.y).add(check.x, the_piece);
+		x = location.x;
+		y = location.y;
+		x = x + the_piece.my_point3.x;
+		y = y - the_piece.my_point3.y;
 		
-		check = location;
-		check.x = check.x + the_piece.my_point3.x;
-		check.y = check.y + the_piece.my_point3.y;
+		my_board.get(y).add(x, the_piece);
 		
-		my_board.get(check.y).add(check.x, the_piece);
+		x = location.x;
+		y = location.y;
+		x = x + the_piece.my_point4.x;
+		y = y - the_piece.my_point4.y;
 		
-		check = location;
-		check.x = check.x + the_piece.my_point4.x;
-		check.y = check.y + the_piece.my_point4.y;
-		
-		my_board.get(check.y).add(check.x, the_piece);
-		
+		my_board.get(y).add(x, the_piece);
+		createNextPiece();
 		return true;
+	}
+	
+	private void createNextPiece(){
+		PieceName name = next_piece[rand.nextInt(next_piece.length)];
+		currentPiece = PieceFactory.createPiece(name, start_location, Rotation.UP);
 	}
 	
 	/**
@@ -101,16 +126,16 @@ public class Board {
 	 * @return A boolean if the points all allign within the board. 
 	 */
 	private boolean boundsCheck(Point the_location, Point the_1, Point the_2, Point the_3, Point the_4){
-		if(the_location.x < 0 || the_location.x > WIDTH){
-			if (the_location.y < 0 || the_location.y > HEIGHT){
-				if(the_location.x + the_1.x < 0 || the_location.x + the_1.x > WIDTH){
-					if(the_location.y + the_1.y < 0 || the_location.y + the_1.y > HEIGHT){
-						if(the_location.x + the_2.x < 0 || the_location.x + the_2.x > WIDTH){
-							if(the_location.y + the_2.y < 0 || the_location.y + the_2.y > HEIGHT){
-								if(the_location.x + the_3.x < 0 || the_location.x + the_3.x > WIDTH){
-									if(the_location.y + the_3.y < 0 || the_location.y + the_3.y > HEIGHT){
-										if(the_location.x + the_4.x < 0 || the_location.x + the_4.x > WIDTH){
-											if(the_location.y + the_4.y < 0 || the_location.y + the_4.y > HEIGHT){
+		if(the_location.x > 0 && the_location.x < WIDTH){
+			if (the_location.y > 0 && the_location.y < HEIGHT){
+				if(the_location.x + the_1.x > 0 && the_location.x + the_1.x < WIDTH){
+					if(the_location.y - the_1.y > 0 && the_location.y - the_1.y < HEIGHT){
+						if(the_location.x + the_2.x > 0 && the_location.x + the_2.x < WIDTH){
+							if(the_location.y - the_2.y > 0 && the_location.y - the_2.y < HEIGHT){
+								if(the_location.x + the_3.x > 0 && the_location.x + the_3.x < WIDTH){
+									if(the_location.y - the_3.y > 0 && the_location.y - the_3.y < HEIGHT){
+										if(the_location.x + the_4.x > 0 && the_location.x + the_4.x < WIDTH){
+											if(the_location.y - the_4.y > 0 && the_location.y - the_4.y < HEIGHT){
 												return true;
 											}
 										}
@@ -177,18 +202,24 @@ public class Board {
 	}
 	
 	public boolean movePieceDown(){
-		return false;
-		//TODO
+		if(boundsCheck(new Point(currentPiece.my_location.x, currentPiece.my_location.y + 1), currentPiece.my_point1, currentPiece.my_point2, currentPiece.my_point3, currentPiece.my_point4)){
+			currentPiece = PieceFactory.createPiece(currentPiece.my_name, new Point(currentPiece.my_location.x, currentPiece.my_location.y + 1), currentPiece.my_rotation);
+			return true;
+		} else {
+			addPiece(currentPiece);
+			return false;
+		}
+
 	}
 	
 	public boolean movePieceLeft(){
-		//TODO
-		return false;
+		currentPiece = PieceFactory.createPiece(currentPiece.my_name, new Point(currentPiece.my_location.x - 1, currentPiece.my_location.y), currentPiece.my_rotation);
+		return true;
 	}
 	
 	public boolean movePieceRight(){
-		//TODO
-		return false;
+		currentPiece = PieceFactory.createPiece(currentPiece.my_name, new Point(currentPiece.my_location.x + 1, currentPiece.my_location.y), currentPiece.my_rotation);
+		return true;
 	}
 	
 	//method to remove rows

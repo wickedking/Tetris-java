@@ -26,6 +26,8 @@ public class GUI {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				board.movePieceDown();
+				board_panel.repaint();
+				System.out.println(board.currentPiece.my_location);
 			}
 		});
 	}
