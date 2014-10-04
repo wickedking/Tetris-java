@@ -117,6 +117,42 @@ public class Board {
 		currentPiece = PieceFactory.createPiece(name, start_location, Rotation.UP);
 	}
 
+	public boolean boundsCheck(Point the_location, Point the_1, Point the_2, Point the_3, Point the_4){
+		//if(the_location.x > 0 && the_location.x < WIDTH){
+		//	if (the_location.y > 0 && the_location.y < HEIGHT){
+		//System.out.println(0);
+		if(the_location.x + the_1.x >= 0 && the_location.x + the_1.x < WIDTH){
+		//	System.out.println(1);
+			if(the_location.y - the_1.y >= 0 && the_location.y - the_1.y < HEIGHT){
+		//		System.out.println(2);
+				if(the_location.x + the_2.x >= 0 && the_location.x + the_2.x < WIDTH){
+		//			System.out.println(3);
+					if(the_location.y - the_2.y >= 0 && the_location.y - the_2.y < HEIGHT){
+		//				System.out.println(4);
+						if(the_location.x + the_3.x >= 0 && the_location.x + the_3.x < WIDTH){
+		//					System.out.println(5);
+							if(the_location.y - the_3.y >= 0 && the_location.y - the_3.y < HEIGHT){
+		//						System.out.println(6);
+								if(the_location.x + the_4.x >= 0 && the_location.x + the_4.x < WIDTH){
+		//							System.out.println(7);
+									if(the_location.y - the_4.y >= 0 && the_location.y - the_4.y < HEIGHT){
+		//								System.out.println(8);
+										if(checkPieceAt(the_location, the_1, the_2, the_3, the_4)){
+											return true;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		//}
+		//}
+		return false;
+	}
+
 	/**
 	 * Checks if the initial location the and sub points are all within the board bounds.
 	 * @param the_location The current location
@@ -124,28 +160,28 @@ public class Board {
 	 * @param the_2 The second sub piece location
 	 * @param the_3 The third sub piece location
 	 * @param the_4 The fourth sub piece location
-	 * @return A boolean if the points all allign within the board. 
+	 * @return A boolean if the points all align within the board. 
 	 */
-	public boolean boundsCheck(Point the_location, Point the_1, Point the_2, Point the_3, Point the_4){
+	public boolean boundsCheckPlus(Point the_location, Point the_1, Point the_2, Point the_3, Point the_4){
 		//if(the_location.x > 0 && the_location.x < WIDTH){
 		//	if (the_location.y > 0 && the_location.y < HEIGHT){
-		System.out.println(0);
+		//System.out.println(0);
 		if(the_location.x + the_1.x >= 0 && the_location.x + the_1.x < WIDTH){
-			System.out.println(1);
+			//System.out.println(1);
 			if(the_location.y - the_1.y >= 0 && the_location.y - the_1.y < HEIGHT){
-				System.out.println(2);
+				//System.out.println(2);
 				if(the_location.x + the_2.x >= 0 && the_location.x + the_2.x < WIDTH){
-					System.out.println(3);
+					//System.out.println(3);
 					if(the_location.y - the_2.y >= 0 && the_location.y - the_2.y < HEIGHT){
-						System.out.println(4);
+						//System.out.println(4);
 						if(the_location.x + the_3.x >= 0 && the_location.x + the_3.x < WIDTH){
-							System.out.println(5);
+							//System.out.println(5);
 							if(the_location.y - the_3.y >= 0 && the_location.y - the_3.y < HEIGHT){
-								System.out.println(6);
+								//System.out.println(6);
 								if(the_location.x + the_4.x >= 0 && the_location.x + the_4.x < WIDTH){
-									System.out.println(7);
+									//System.out.println(7);
 									if(the_location.y - the_4.y >= 0 && the_location.y - the_4.y < HEIGHT){
-										System.out.println(8);
+										//System.out.println(8);
 										if(!checkPieceAt(the_location, the_1, the_2, the_3, the_4)){
 											addPiece(currentPiece);
 										}
@@ -175,16 +211,16 @@ public class Board {
 	private boolean checkPieceAt(Point the_location, Point the_1, Point the_2, Point the_3, Point the_4){
 		System.out.println("checkPieceAt1");
 		if(isPiece(the_location.x + the_1.x, the_location.y - the_1.y)){
-			System.out.println("checkPieceAt2");
+			//System.out.println("checkPieceAt2");
 			return false;
 		} if(isPiece(the_location.x + the_2.x, the_location.y - the_2.y)){
-			System.out.println("checkPieceAt3");
+			//System.out.println("checkPieceAt3");
 			return false;
 		} if(isPiece(the_location.x + the_3.x, the_location.y - the_3.y)){
-			System.out.println("checkPieceAt4");
+			//System.out.println("checkPieceAt4");
 			return false;
 		} if(isPiece(the_location.x + the_4.x, the_location.y - the_4.y)){
-			System.out.println("checkPieceAt5");
+			//System.out.println("checkPieceAt5");
 			return false;
 		}
 		return true;
@@ -203,13 +239,14 @@ public class Board {
 		} else if (the_y > HEIGHT || the_y < 0){
 			return false;
 		}
+		System.out.println("x: " + the_x + " y: " + the_y);
 		Piece test = my_board.get(the_y).get(the_x);
 		if (test == null){
 			return false;
 		}
 		return true;
 	}
-	
+
 	private void checkFullRows(){
 		for(int i = 0; i < HEIGHT; i++){
 			if(isRowFull(i)){
@@ -220,7 +257,7 @@ public class Board {
 				}
 			}
 		}
-		
+
 	}
 
 	/**
@@ -255,7 +292,7 @@ public class Board {
 	}
 
 	public boolean movePieceDown(){
-		if(boundsCheck(new Point(currentPiece.my_location.x, currentPiece.my_location.y + 1), currentPiece.my_point1, currentPiece.my_point2, currentPiece.my_point3, currentPiece.my_point4)){
+		if(boundsCheckPlus(new Point(currentPiece.my_location.x, currentPiece.my_location.y + 1), currentPiece.my_point1, currentPiece.my_point2, currentPiece.my_point3, currentPiece.my_point4)){
 			currentPiece = PieceFactory.createPiece(currentPiece.my_name, new Point(currentPiece.my_location.x, currentPiece.my_location.y + 1), currentPiece.my_rotation);
 			return true;
 		} else {
@@ -266,7 +303,7 @@ public class Board {
 	}
 
 	public boolean movePieceLeft(){
-		if(boundsCheck(new Point(currentPiece.my_location.x, currentPiece.my_location.y + 1), currentPiece.my_point1, currentPiece.my_point2, currentPiece.my_point3, currentPiece.my_point4)){
+		if(boundsCheck(new Point(currentPiece.my_location.x - 1, currentPiece.my_location.y), currentPiece.my_point1, currentPiece.my_point2, currentPiece.my_point3, currentPiece.my_point4)){
 			currentPiece = PieceFactory.createPiece(currentPiece.my_name, new Point(currentPiece.my_location.x - 1, currentPiece.my_location.y), currentPiece.my_rotation);
 			return true;
 		} else {
@@ -275,7 +312,7 @@ public class Board {
 	}
 
 	public boolean movePieceRight(){
-		if(boundsCheck(new Point(currentPiece.my_location.x, currentPiece.my_location.y + 1), currentPiece.my_point1, currentPiece.my_point2, currentPiece.my_point3, currentPiece.my_point4)){
+		if(boundsCheck(new Point(currentPiece.my_location.x + 1, currentPiece.my_location.y), currentPiece.my_point1, currentPiece.my_point2, currentPiece.my_point3, currentPiece.my_point4)){
 			currentPiece = PieceFactory.createPiece(currentPiece.my_name, new Point(currentPiece.my_location.x + 1, currentPiece.my_location.y), currentPiece.my_rotation);
 			return true;
 		} else {
@@ -284,8 +321,12 @@ public class Board {
 	}
 
 	public boolean rotate(){
-		currentPiece = currentPiece.Rotate();
-		return true;
+		Piece next = currentPiece.Rotate();
+		if(boundsCheck(next.my_location, next.my_point1, next.my_point2, next.my_point3, next.my_point4)){
+			currentPiece = next;
+			return true;
+		}
+		return false;
 	}
 
 	//method to remove rows

@@ -40,7 +40,7 @@ public class BoardPanel extends JPanel{
 				} else{
 					g2d.setColor(new Color(0,0,0));
 				}
-				g2d.fillRect(j * block_width, i * block_height, block_width, block_height);
+				g2d.fillRect(j * block_width , i * block_height , block_width -1, block_height-1);
 			}
 		}
 		Piece currentPiece = my_board.currentPiece;

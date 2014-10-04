@@ -53,13 +53,9 @@ public class GUI {
 				System.out.println(e.getKeyChar());
 				if(e.getKeyChar() == KeyEvent.VK_4){
 					System.out.println("Left");
-					if(board.boundsCheck(new Point(board.currentPiece.my_location.x - 1, board.currentPiece.my_location.y), board.currentPiece.my_point1, board.currentPiece.my_point2, board.currentPiece.my_point3, board.currentPiece.my_point4)){
-						board.movePieceLeft();
-					}
+					board.movePieceLeft();
 				} else if(e.getKeyChar() == KeyEvent.VK_6){
-					if(board.boundsCheck(new Point(board.currentPiece.my_location.x + 1, board.currentPiece.my_location.y), board.currentPiece.my_point1, board.currentPiece.my_point2, board.currentPiece.my_point3, board.currentPiece.my_point4)){
-						board.movePieceRight();
-					}
+					board.movePieceRight();
 					System.out.println("right");
 				} else if(e.getKeyChar() == KeyEvent.VK_2){
 					board.movePieceDown();
