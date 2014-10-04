@@ -12,7 +12,7 @@ public class ZPiece extends Piece{
 		if(the_rotation == Rotation.UP){
 			return new LocalPoint(new Point(0,1), new Point(1,1), new Point(1,0), new Point(2,0));
 		}else{
-			return new LocalPoint(new Point(0,0), new Point(0,1), new Point(1,0), new Point(2,0));
+			return new LocalPoint(new Point(0,0), new Point(0,1), new Point(1,1), new Point(1,2));
 		} 
 	}
 
