@@ -1,6 +1,6 @@
-put in each piece rotation.
 create a score box.
 nextPiece?
 handle current piece better
-check for bounds check when moving
-come back when not so tired. 
+Start piece above board
+add a game over method.
+create a way to check if piece is being added above board, or just moving

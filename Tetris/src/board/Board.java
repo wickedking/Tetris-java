@@ -30,7 +30,7 @@ public class Board {
 	/**
 	 * The start point for all new pieces. 
 	 */
-	private static final Point start_location = new Point(4,3);
+	private static final Point start_location = new Point(4,0);
 
 	/**
 	 * The Height of the board
@@ -69,6 +69,16 @@ public class Board {
 			}
 		}
 	}
+	
+	/**
+	 * Quits the game. Handle this better
+	 //TODO
+	 */
+	private void gameOver(){
+		System.out.println("Game Over Man!");
+		System.exit(0);
+		
+	}
 
 	/**
 	 * Adds a reference of the piece to the board. 
@@ -77,11 +87,16 @@ public class Board {
 	 */
 	public boolean addPiece(Piece the_piece){
 		Point location = the_piece.my_location;
-		//if (!boundsCheck(location, the_piece.my_point1, the_piece.my_point2, the_piece.my_point3, the_piece.my_point4)){
-		//	return false;
-		//}
+
 		int x = location.x;
 		int y = location.y;
+		
+		if(y < 0 || y - the_piece.my_point1.y < 0 || y - the_piece.my_point2.y < 0 || y - the_piece.my_point3.y < 0 || y - the_piece.my_point4.y < 0) {
+			gameOver();
+		}
+		
+		
+		
 		x = x + the_piece.my_point1.x;
 		y = y - the_piece.my_point1.y;
 
@@ -168,21 +183,23 @@ public class Board {
 		//System.out.println(0);
 		if(the_location.x + the_1.x >= 0 && the_location.x + the_1.x < WIDTH){
 			//System.out.println(1);
-			if(the_location.y - the_1.y >= 0 && the_location.y - the_1.y < HEIGHT){
+			if(the_location.y - the_1.y < HEIGHT){
 				//System.out.println(2);
 				if(the_location.x + the_2.x >= 0 && the_location.x + the_2.x < WIDTH){
 					//System.out.println(3);
-					if(the_location.y - the_2.y >= 0 && the_location.y - the_2.y < HEIGHT){
+					if(the_location.y - the_2.y < HEIGHT){
 						//System.out.println(4);
 						if(the_location.x + the_3.x >= 0 && the_location.x + the_3.x < WIDTH){
 							//System.out.println(5);
-							if(the_location.y - the_3.y >= 0 && the_location.y - the_3.y < HEIGHT){
+							if(the_location.y - the_3.y < HEIGHT){
 								//System.out.println(6);
 								if(the_location.x + the_4.x >= 0 && the_location.x + the_4.x < WIDTH){
 									//System.out.println(7);
-									if(the_location.y - the_4.y >= 0 && the_location.y - the_4.y < HEIGHT){
+									if(the_location.y - the_4.y < HEIGHT){
 										//System.out.println(8);
-										if(!checkPieceAt(the_location, the_1, the_2, the_3, the_4)){
+										if(the_location.y - the_1.y < 0 || the_location.y - the_2.y < 0 || the_location.y - the_3.y < 0 || the_location.y - the_4.y < 0) {
+											return true;
+										}else if(!checkPieceAt(the_location, the_1, the_2, the_3, the_4)){
 											addPiece(currentPiece);
 										}
 										return true;
@@ -277,7 +294,7 @@ public class Board {
 	private boolean isRowFull(final int the_row){
 		ArrayList<Piece> row = my_board.get(the_row);
 		boolean check = true;
-		System.out.println("Row size: " +row.size());
+		//System.out.println("Row size: " +row.size());
 		for(int i = 0; i < row.size(); i++){
 			if(row.get(i) == null){
 				check = false;

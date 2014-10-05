@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -11,16 +10,36 @@ import javax.swing.JFrame;
 
 import board.Board;
 
+/**
+ * The frame and key / mouse event handler for the program. 
+ * @author cody
+ *
+ */
 public class GUI {
 
+	/**
+	 * A reference to the Frame.
+	 */
 	JFrame frame;
 
+	/**
+	 * A reference to the game board_panel.
+	 */
 	BoardPanel board_panel;
 
+	/**
+	 * A reference to the game board.
+	 */
 	Board board;
 
+	/**
+	 * A reference to a timer. 
+	 */
 	Timer timer;
 
+	/**
+	 * Default no-args constructor. Setups up the game, but does not run it. 
+	 */
 	public GUI(){
 		frame = new JFrame();
 		board = new Board();
@@ -68,6 +87,9 @@ public class GUI {
 		});
 	}
 
+	/**
+	 * Starts up the game. 
+	 */
 	public void start(){
 		frame.setSize(400, 600);
 		frame.add(board_panel);
