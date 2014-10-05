@@ -209,7 +209,6 @@ public class Board {
 	 * @return False if there is no piece in the locations asked.
 	 */
 	private boolean checkPieceAt(Point the_location, Point the_1, Point the_2, Point the_3, Point the_4){
-		System.out.println("checkPieceAt1");
 		if(isPiece(the_location.x + the_1.x, the_location.y - the_1.y)){
 			//System.out.println("checkPieceAt2");
 			return false;
@@ -239,8 +238,13 @@ public class Board {
 		} else if (the_y > HEIGHT || the_y < 0){
 			return false;
 		}
-		System.out.println("x: " + the_x + " y: " + the_y);
-		Piece test = my_board.get(the_y).get(the_x);
+		ArrayList<Piece> row = my_board.get(the_y);
+		Piece test = null;
+		//System.out.println("Row size " + row.size() );
+		//System.out.println("the_x: " + the_x);
+		if(row.size() > the_x){
+			test = row.get(the_x);
+		}
 		if (test == null){
 			return false;
 		}
@@ -249,12 +253,17 @@ public class Board {
 
 	private void checkFullRows(){
 		for(int i = 0; i < HEIGHT; i++){
+			//System.out.println("i: " + i);
 			if(isRowFull(i)){
+				//System.out.println("Removing row: " + i);
 				my_board.remove(i);
 				my_board.add(0, new ArrayList<Piece>());
 				for(int j = 0; j < WIDTH; j++){
-					my_board.get(i).add(null);
+					//System.out.println("Inner loop i: " + i);
+					//System.out.println("J: " + j + "\n");
+					my_board.get(0).add(null);
 				}
+				i--;
 			}
 		}
 
@@ -268,6 +277,7 @@ public class Board {
 	private boolean isRowFull(final int the_row){
 		ArrayList<Piece> row = my_board.get(the_row);
 		boolean check = true;
+		System.out.println("Row size: " +row.size());
 		for(int i = 0; i < row.size(); i++){
 			if(row.get(i) == null){
 				check = false;

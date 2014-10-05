@@ -50,16 +50,15 @@ public class GUI {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				System.out.println(e.getKeyChar());
 				if(e.getKeyChar() == KeyEvent.VK_4){
-					System.out.println("Left");
+					//System.out.println("Left");
 					board.movePieceLeft();
 				} else if(e.getKeyChar() == KeyEvent.VK_6){
 					board.movePieceRight();
-					System.out.println("right");
+					//System.out.println("right");
 				} else if(e.getKeyChar() == KeyEvent.VK_2){
 					board.movePieceDown();
-					System.out.println("down");
+					//System.out.println("down");
 				} else if(e.getKeyChar() == KeyEvent.VK_5) {
 					board.rotate();
 				}
