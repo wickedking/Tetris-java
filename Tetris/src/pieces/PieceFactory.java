@@ -48,6 +48,9 @@ public class PieceFactory {
 		case Z:
 			the_piece = new ZPiece(the_location, the_rotation);
 			break;
+		case T:
+			the_piece = new TPiece(the_location, the_rotation);
+			break;
 		default:
 			the_piece = new IPiece(the_location, the_rotation);
 			break;

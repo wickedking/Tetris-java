@@ -20,7 +20,7 @@ public class Board {
 	/**
 	 * An array of all the different types of pieces.
 	 */
-	private static final PieceName next_piece[] = {PieceName.I, PieceName.J, PieceName.L, PieceName.O, PieceName.S, PieceName.Z};
+	private static final PieceName next_piece[] = {PieceName.I, PieceName.J, PieceName.L, PieceName.O, PieceName.S, PieceName.Z, PieceName.T};
 
 	/**
 	 * A reference to a random object. The actual random not just a random object.4

@@ -6,6 +6,7 @@ public enum PieceName {
 	L,
 	O,
 	S,
-	Z
+	Z,
+	T
 
 }
