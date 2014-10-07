@@ -47,21 +47,14 @@ public class Board {
 	 */
 	private ArrayList<ArrayList<Piece>> my_board;
 
-	/**
-	 * The current piece that is dropping.
-	 */
 	public Piece currentPiece;
-	
-	public Piece nextPiece;
 
 	/**
 	 * Default constructor
 	 */
 	public Board(){
 		createBoard();
-		PieceName name = next_piece[rand.nextInt(next_piece.length)];
-		nextPiece = PieceFactory.createPiece(name, start_location, Rotation.UP);
-		createNextPiece();
+		currentPiece = PieceFactory.createPiece(PieceName.L, start_location, Rotation.UP);
 	}
 
 	/**
@@ -82,7 +75,7 @@ public class Board {
 	 //TODO
 	 */
 	private void gameOver(){
-		System.out.println("Game Over Man!");
+		//System.out.println("Game Over Man!");
 		System.exit(0);
 		
 	}
@@ -135,10 +128,8 @@ public class Board {
 	}
 
 	private void createNextPiece(){
-		currentPiece = nextPiece;
 		PieceName name = next_piece[rand.nextInt(next_piece.length)];
-		nextPiece = PieceFactory.createPiece(name, start_location, Rotation.UP);
-		System.out.println("Next Piece: " + nextPiece.my_name);
+		currentPiece = PieceFactory.createPiece(name, start_location, Rotation.UP);
 	}
 
 	public boolean boundsCheck(Point the_location, Point the_1, Point the_2, Point the_3, Point the_4){
@@ -363,6 +354,24 @@ public class Board {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean fallPiece(){
+		int move = fallPieceNumber();
+		for(int i = 0; i < move; i++){
+			movePieceDown();
+		}
+		return true;
+	}
+	
+	public int fallPieceNumber(){
+		int fall = 0;
+		for(int i = 1; i < HEIGHT; i++){
+			if(boundsCheck(new Point(currentPiece.my_location.x, currentPiece.my_location.y + i), currentPiece.my_point1, currentPiece.my_point2, currentPiece.my_point3, currentPiece.my_point4)){
+				fall = i;
+			}
+		}
+		return fall;
 	}
 
 	//method to remove rows

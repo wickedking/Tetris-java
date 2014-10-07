@@ -1,11 +1,14 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.Timer;
 import javax.swing.JFrame;
 
@@ -21,24 +24,26 @@ public class GUI {
 	/**
 	 * A reference to the Frame.
 	 */
-	JFrame frame;
+	private JFrame frame;
 
 	/**
 	 * A reference to the game board_panel.
 	 */
-	BoardPanel board_panel;
-	
-	NextPiecePanel next_panel;
+	private BoardPanel board_panel;
 
 	/**
 	 * A reference to the game board.
 	 */
-	Board board;
+	private Board board;
 
 	/**
 	 * A reference to a timer. 
 	 */
-	Timer timer;
+	private Timer timer;
+	
+	private boolean sound;
+	
+	private boolean my_sound_effects;
 
 	/**
 	 * Default no-args constructor. Setups up the game, but does not run it. 
@@ -47,7 +52,8 @@ public class GUI {
 		frame = new JFrame();
 		board = new Board();
 		board_panel = new BoardPanel(board);
-		next_panel = new NextPiecePanel(board);
+		sound = true;
+		my_sound_effects = true;
 		timer = new Timer(1000, new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -84,20 +90,72 @@ public class GUI {
 					//System.out.println("down");
 				} else if(e.getKeyChar() == KeyEvent.VK_5) {
 					board.rotate();
+				} else if(e.getKeyChar() == KeyEvent.VK_0){
+					board.fallPiece();
 				}
 				board_panel.repaint();
 			}
 
 		});
+		
+		
 	}
 
 	/**
 	 * Starts up the game. 
 	 */
 	public void start(){
+		JMenuBar menubar = new JMenuBar();
+		JMenu file = new JMenu("File");
+		file.setMnemonic(KeyEvent.VK_F);
+		JMenuItem newgame = new JMenuItem("New Game");
+		newgame.setMnemonic(KeyEvent.VK_N);
+		JMenuItem exit = new JMenuItem("Exit");
+		exit.setMnemonic(KeyEvent.VK_X);
+		exit.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);				
+			}
+		});
+		file.add(newgame);
+		file.add(exit);
+		menubar.add(file);
+		
+		JMenu settings = new JMenu("Settings");
+		settings.setMnemonic(KeyEvent.VK_S);
+		final JCheckBoxMenuItem events = new JCheckBoxMenuItem("Music");
+		events.setSelected(true);
+		events.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				sound = events.isSelected();
+				
+			}
+			
+		});
+		
+		final JCheckBoxMenuItem sound_effects = new JCheckBoxMenuItem("Sound Effects");
+		sound_effects.setSelected(true);
+		sound_effects.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				my_sound_effects = sound_effects.isSelected();
+				
+			}
+			
+		});
+		
+		settings.add(events);
+		settings.add(sound_effects);
+		menubar.add(settings);
+		frame.setJMenuBar(menubar);
+		
 		frame.setSize(400, 600);
 		frame.add(board_panel);
-		frame.add(next_panel, BorderLayout.EAST);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 		timer.start();
