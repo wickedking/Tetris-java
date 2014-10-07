@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.Timer;
 import javax.swing.JFrame;
 
@@ -80,17 +83,31 @@ public class GUI {
 					//System.out.println("down");
 				} else if(e.getKeyChar() == KeyEvent.VK_5) {
 					board.rotate();
+				} else if(e.getKeyChar() == KeyEvent.VK_0){
+					board.fallPiece();
 				}
 				board_panel.repaint();
 			}
 
 		});
+		
+		
 	}
 
 	/**
 	 * Starts up the game. 
 	 */
 	public void start(){
+		JMenuBar menubar = new JMenuBar();
+		JMenu file = new JMenu("File");
+		file.setMnemonic(KeyEvent.VK_F);
+		JMenuItem newgame = new JMenuItem("New Game");
+		JMenuItem exit = new JMenuItem("Exit");
+		file.add(newgame);
+		file.add(exit);
+		menubar.add(file);
+		frame.setJMenuBar(menubar);
+		
 		frame.setSize(400, 600);
 		frame.add(board_panel);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

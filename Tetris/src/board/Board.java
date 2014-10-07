@@ -355,6 +355,24 @@ public class Board {
 		}
 		return false;
 	}
+	
+	public boolean fallPiece(){
+		int move = fallPieceNumber();
+		for(int i = 0; i < move; i++){
+			movePieceDown();
+		}
+		return true;
+	}
+	
+	public int fallPieceNumber(){
+		int fall = 0;
+		for(int i = 1; i < HEIGHT; i++){
+			if(boundsCheck(new Point(currentPiece.my_location.x, currentPiece.my_location.y + i), currentPiece.my_point1, currentPiece.my_point2, currentPiece.my_point3, currentPiece.my_point4)){
+				fall = i;
+			}
+		}
+		return fall;
+	}
 
 	//method to remove rows
 
