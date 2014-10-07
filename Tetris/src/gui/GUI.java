@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -26,6 +27,8 @@ public class GUI {
 	 * A reference to the game board_panel.
 	 */
 	BoardPanel board_panel;
+	
+	NextPiecePanel next_panel;
 
 	/**
 	 * A reference to the game board.
@@ -44,6 +47,7 @@ public class GUI {
 		frame = new JFrame();
 		board = new Board();
 		board_panel = new BoardPanel(board);
+		next_panel = new NextPiecePanel(board);
 		timer = new Timer(1000, new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -93,6 +97,7 @@ public class GUI {
 	public void start(){
 		frame.setSize(400, 600);
 		frame.add(board_panel);
+		frame.add(next_panel, BorderLayout.EAST);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 		timer.start();
