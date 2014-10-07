@@ -48,13 +48,16 @@ public class Board {
 	private ArrayList<ArrayList<Piece>> my_board;
 
 	public Piece currentPiece;
+	
+	public Piece nextPiece;
 
 	/**
 	 * Default constructor
 	 */
 	public Board(){
 		createBoard();
-		currentPiece = PieceFactory.createPiece(PieceName.L, start_location, Rotation.UP);
+		nextPiece = PieceFactory.createPiece(PieceName.L, start_location, Rotation.UP);
+		createNextPiece();
 	}
 
 	/**
@@ -129,7 +132,8 @@ public class Board {
 
 	private void createNextPiece(){
 		PieceName name = next_piece[rand.nextInt(next_piece.length)];
-		currentPiece = PieceFactory.createPiece(name, start_location, Rotation.UP);
+		currentPiece = nextPiece;
+		nextPiece = PieceFactory.createPiece(name, start_location, Rotation.UP);
 	}
 
 	public boolean boundsCheck(Point the_location, Point the_1, Point the_2, Point the_3, Point the_4){
