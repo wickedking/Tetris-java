@@ -24,26 +24,26 @@ public class GUI {
 	/**
 	 * A reference to the Frame.
 	 */
-	JFrame frame;
+	private JFrame frame;
 
 	/**
 	 * A reference to the game board_panel.
 	 */
-	BoardPanel board_panel;
+	private BoardPanel board_panel;
 
 	/**
 	 * A reference to the game board.
 	 */
-	Board board;
+	private Board board;
 
 	/**
 	 * A reference to a timer. 
 	 */
-	Timer timer;
+	private Timer timer;
 	
-	boolean sound;
+	private boolean sound;
 	
-	boolean my_sound_effects;
+	private boolean my_sound_effects;
 
 	/**
 	 * Default no-args constructor. Setups up the game, but does not run it. 
