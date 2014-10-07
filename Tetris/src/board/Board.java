@@ -75,7 +75,7 @@ public class Board {
 	 //TODO
 	 */
 	private void gameOver(){
-		System.out.println("Game Over Man!");
+		//System.out.println("Game Over Man!");
 		System.exit(0);
 		
 	}

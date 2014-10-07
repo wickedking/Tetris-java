@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -39,6 +40,10 @@ public class GUI {
 	 * A reference to a timer. 
 	 */
 	Timer timer;
+	
+	boolean sound;
+	
+	boolean my_sound_effects;
 
 	/**
 	 * Default no-args constructor. Setups up the game, but does not run it. 
@@ -47,6 +52,8 @@ public class GUI {
 		frame = new JFrame();
 		board = new Board();
 		board_panel = new BoardPanel(board);
+		sound = true;
+		my_sound_effects = true;
 		timer = new Timer(1000, new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -102,10 +109,49 @@ public class GUI {
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
 		JMenuItem newgame = new JMenuItem("New Game");
+		newgame.setMnemonic(KeyEvent.VK_N);
 		JMenuItem exit = new JMenuItem("Exit");
+		exit.setMnemonic(KeyEvent.VK_X);
+		exit.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);				
+			}
+		});
 		file.add(newgame);
 		file.add(exit);
 		menubar.add(file);
+		
+		JMenu settings = new JMenu("Settings");
+		settings.setMnemonic(KeyEvent.VK_S);
+		final JCheckBoxMenuItem events = new JCheckBoxMenuItem("Music");
+		events.setSelected(true);
+		events.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				sound = events.isSelected();
+				
+			}
+			
+		});
+		
+		final JCheckBoxMenuItem sound_effects = new JCheckBoxMenuItem("Sound Effects");
+		sound_effects.setSelected(true);
+		sound_effects.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				my_sound_effects = sound_effects.isSelected();
+				
+			}
+			
+		});
+		
+		settings.add(events);
+		settings.add(sound_effects);
+		menubar.add(settings);
 		frame.setJMenuBar(menubar);
 		
 		frame.setSize(400, 600);
