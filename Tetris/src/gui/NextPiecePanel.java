@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -59,16 +60,22 @@ public class NextPiecePanel extends JPanel{
 		final Graphics2D g2d = (Graphics2D) graphics;
 		final AbstractPiece next = my_board.nextPiece;
 		Point p = next.my_point1;
-		g2d.fillRect(p.x, p.y, block_width, block_height);
+		
+		g2d.setColor(new Color(255,255,255));
+		g2d.fillRect(0, 0, block_width * 3, block_height * 3);
+		
+		g2d.setColor(new Color(128, 128,128));
+		
+		g2d.fillRect(p.x * block_width, p.y * block_height, block_width, block_height);
 		
 		p = next.my_point2;
-		g2d.fillRect(p.x, p.y, block_width, block_height);
+		g2d.fillRect(p.x * block_width, p.y * block_height, block_width, block_height);
 		
 		p = next.my_point3;
-		g2d.fillRect(p.x, p.y, block_width, block_height);
+		g2d.fillRect(p.x * block_width, p.y * block_height, block_width, block_height);
 		
 		p = next.my_point4;
-		g2d.fillRect(p.x, p.y, block_width, block_height);
+		g2d.fillRect(p.x * block_width, p.y * block_height, block_width, block_height);
 		
 	}
 

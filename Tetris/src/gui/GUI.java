@@ -1,13 +1,18 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import javax.swing.BoxLayout;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.JFrame;
 
@@ -29,6 +34,11 @@ public class GUI {
 	 * A reference to the game board_panel.
 	 */
 	private final BoardPanel board_panel;
+	
+	/**
+	 * A reference to the next piece panel.
+	 */
+	private final NextPiecePanel next_piece_panel;
 
 	/**
 	 * A reference to the game board.
@@ -57,6 +67,7 @@ public class GUI {
 		frame = new JFrame();
 		board = new Board();
 		board_panel = new BoardPanel(board);
+		next_piece_panel = new NextPiecePanel(board);
 		sound = true;
 		effects = true;
 		timer = new Timer(1000, new ActionListener(){
@@ -68,6 +79,7 @@ public class GUI {
 			public void actionPerformed(final ActionEvent arg0) {
 				board.movePieceDown();
 				board_panel.repaint();
+				next_piece_panel.repaint();
 				//System.out.println(board.currentPiece.my_location);
 			}
 		});
@@ -91,6 +103,7 @@ public class GUI {
 					board.fallPiece();
 				}
 				board_panel.repaint();
+				next_piece_panel.repaint();
 			}
 
 		});
@@ -103,8 +116,14 @@ public class GUI {
 	 */
 	public void start(){
 		createMenu();
+		
+		JPanel eastside = new JPanel();
+		eastside.setLayout(new BoxLayout(eastside, BoxLayout.Y_AXIS));
+		eastside.add(next_piece_panel);
 		frame.setSize(400, 600);
+		frame.setLayout(new GridLayout(1,2));
 		frame.add(board_panel);
+		frame.add(eastside);//, BorderLayout.EAST);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 		timer.start();

@@ -81,7 +81,6 @@ public class Board {
 	
 	/**
 	 * Quits the game. Handle this better
-	 //TODO
 	 */
 	private void gameOver(){
 		//System.out.println("Game Over Man!");
