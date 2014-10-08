@@ -41,8 +41,14 @@ public class GUI {
 	 */
 	private Timer timer;
 	
+	/**
+	 * A check if sound is to be currently played. 
+	 */
 	private boolean sound;
 	
+	/**
+	 * A check if sound effects are to be played. 
+	 */
 	private boolean my_sound_effects;
 
 	/**
@@ -105,6 +111,19 @@ public class GUI {
 	 * Starts up the game. 
 	 */
 	public void start(){
+		createMenu();
+		frame.setSize(400, 600);
+		frame.add(board_panel);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setVisible(true);
+		timer.start();
+
+	}
+	
+	/**
+	 * Creates the menu for the frame. 
+	 */
+	private void createMenu(){
 		JMenuBar menubar = new JMenuBar();
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
@@ -153,13 +172,6 @@ public class GUI {
 		settings.add(sound_effects);
 		menubar.add(settings);
 		frame.setJMenuBar(menubar);
-		
-		frame.setSize(400, 600);
-		frame.add(board_panel);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setVisible(true);
-		timer.start();
-
 	}
 
 }

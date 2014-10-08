@@ -41,7 +41,7 @@ public class BoardPanel extends JPanel{
 	/**
 	 * The reference to the game board.
 	 */
-	Board my_board;
+	private Board my_board;
 
 	/**
 	 * Default constructor.

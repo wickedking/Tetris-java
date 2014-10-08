@@ -32,8 +32,15 @@ public class NextPiecePanel extends JPanel{
 	 */
 	private final int y_offset = 0;
 	
-	Board my_board;
+	/**
+	 * A reference to the board
+	 */
+	private Board my_board;
 	
+	/**
+	 * Default constructor.
+	 * @param the_board A reference to the game board. 
+	 */
 	public NextPiecePanel(Board the_board){
 		super();
 		my_board = the_board;
