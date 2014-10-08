@@ -10,12 +10,18 @@ import java.awt.Point;
 public class PieceFactory {
 	
 	/**
+	 * Private constructor.
+	 */
+	private PieceFactory(){
+	}
+	
+	/**
 	 * Used to move the piece down 1 spot. Used to keep the pieces immutable.
 	 * @param the_name The name of the Piece to create.
 	 * @param the_location The current location of the piece.
 	 * @return The newly created piece. 
 	 */
-	protected static Piece newPiece(PieceName the_name, Point the_location){
+	protected static AbstractPiece newPiece(final PieceName the_name, final Point the_location){
 		the_location.y = the_location.y + 1;
 		return createPiece(the_name, the_location, Rotation.UP);
 	}
@@ -27,8 +33,8 @@ public class PieceFactory {
 	 * @param the_rotation The rotation of the piece. 
 	 * @return The newly created piece. 
 	 */
-	public static Piece createPiece(PieceName the_name, Point the_location, Rotation the_rotation){
-		Piece the_piece;
+	public static AbstractPiece createPiece(final PieceName the_name, final Point the_location, final Rotation the_rotation){
+		final AbstractPiece the_piece;
 		switch (the_name) {
 		case I:
 			the_piece = new IPiece(the_location, the_rotation);

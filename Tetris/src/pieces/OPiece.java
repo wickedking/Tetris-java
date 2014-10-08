@@ -7,14 +7,14 @@ import java.awt.Point;
  * @author cody
  *
  */
-public class OPiece extends Piece{
+public class OPiece extends AbstractPiece{
 
 	/**
 	 * Default constructor that takes 2 params
 	 * @param the_location The starting locations of the piece. 
 	 * @param the_rotation The current Rotation of the piece. 
 	 */
-	public OPiece(Point the_location, Rotation the_rotation) {
+	public OPiece(final Point the_location,final Rotation the_rotation) {
 		super(PieceName.O, the_location, the_rotation, constructPiece());
 		constructPiece();
 		// TODO Auto-generated constructor stub
@@ -34,7 +34,7 @@ public class OPiece extends Piece{
 	 * @return Returns a new piece of the new rotation.
 	 */
 	@Override
-	public Piece Rotate() {
+	public AbstractPiece rotate() {
 		return this;
 	}
 

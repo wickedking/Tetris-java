@@ -7,14 +7,14 @@ import java.awt.Point;
  * @author cody
  *
  */
-public class IPiece extends Piece{
+public class IPiece extends AbstractPiece{
 
 	/**
 	 * Default constructor that takes 2 params
 	 * @param the_location The starting locations of the piece. 
 	 * @param the_rotation The current Rotation of the piece. 
 	 */
-	public IPiece(Point the_location, Rotation the_rotation) {
+	public IPiece(final Point the_location,final Rotation the_rotation) {
 		super(PieceName.I, the_location, the_rotation, constructPiece(the_rotation));
 		// TODO Auto-generated constructor stub
 	}
@@ -24,7 +24,7 @@ public class IPiece extends Piece{
 	 * @param the_rotation The Current Rotation.
 	 * @return An object of Points for each individual blocks based off a grid. 
 	 */
-	private static LocalPoint constructPiece(Rotation the_rotation){
+	private static LocalPoint constructPiece(final Rotation the_rotation){
 		if(the_rotation == Rotation.UP){
 			return new LocalPoint(new Point(0,0), new Point(0, 1), new Point(0,2), new Point(0,3));
 		} else {
@@ -37,7 +37,7 @@ public class IPiece extends Piece{
 	 * @return Returns a new piece of the new rotation.
 	 */
 	@Override
-	public Piece Rotate() {
+	public AbstractPiece rotate() {
 		if(super.my_rotation == Rotation.UP){
 			return new IPiece(super.my_location, Rotation.RIGHT);
 		} else{

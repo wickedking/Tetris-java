@@ -2,9 +2,8 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -24,12 +23,12 @@ public class GUI {
 	/**
 	 * A reference to the Frame.
 	 */
-	private JFrame frame;
+	private final  JFrame frame;
 
 	/**
 	 * A reference to the game board_panel.
 	 */
-	private BoardPanel board_panel;
+	private final BoardPanel board_panel;
 
 	/**
 	 * A reference to the game board.
@@ -39,7 +38,7 @@ public class GUI {
 	/**
 	 * A reference to a timer. 
 	 */
-	private Timer timer;
+	private final Timer timer;
 	
 	/**
 	 * A check if sound is to be currently played. 
@@ -49,7 +48,7 @@ public class GUI {
 	/**
 	 * A check if sound effects are to be played. 
 	 */
-	private boolean my_sound_effects;
+	private boolean effects;
 
 	/**
 	 * Default no-args constructor. Setups up the game, but does not run it. 
@@ -59,41 +58,33 @@ public class GUI {
 		board = new Board();
 		board_panel = new BoardPanel(board);
 		sound = true;
-		my_sound_effects = true;
+		effects = true;
 		timer = new Timer(1000, new ActionListener(){
+			
+			/**
+			 * An override of the Action Performed method.
+			 */
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(final ActionEvent arg0) {
 				board.movePieceDown();
 				board_panel.repaint();
 				//System.out.println(board.currentPiece.my_location);
 			}
 		});
 
-		frame.addKeyListener(new KeyListener(){
+		frame.addKeyListener(new KeyAdapter(){
 
+			/**
+			 * Uses the Keytyped method to determine the key typed.
+			 */
 			@Override
-			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				//nothing
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				//nothing
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
+			public void keyTyped(final KeyEvent e) {
 				if(e.getKeyChar() == KeyEvent.VK_4){
-					//System.out.println("Left");
 					board.movePieceLeft();
 				} else if(e.getKeyChar() == KeyEvent.VK_6){
 					board.movePieceRight();
-					//System.out.println("right");
 				} else if(e.getKeyChar() == KeyEvent.VK_2){
 					board.movePieceDown();
-					//System.out.println("down");
 				} else if(e.getKeyChar() == KeyEvent.VK_5) {
 					board.rotate();
 				} else if(e.getKeyChar() == KeyEvent.VK_0){
@@ -124,17 +115,20 @@ public class GUI {
 	 * Creates the menu for the frame. 
 	 */
 	private void createMenu(){
-		JMenuBar menubar = new JMenuBar();
-		JMenu file = new JMenu("File");
+		final JMenuBar menubar = new JMenuBar();
+		final JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
-		JMenuItem newgame = new JMenuItem("New Game");
+		final JMenuItem newgame = new JMenuItem("New Game");
 		newgame.setMnemonic(KeyEvent.VK_N);
-		JMenuItem exit = new JMenuItem("Exit");
+		final JMenuItem exit = new JMenuItem("Exit");
 		exit.setMnemonic(KeyEvent.VK_X);
 		exit.addActionListener(new ActionListener(){
 
+			/**
+			 * The override of the action performed.
+			 */
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				System.exit(0);				
 			}
 		});
@@ -142,14 +136,14 @@ public class GUI {
 		file.add(exit);
 		menubar.add(file);
 		
-		JMenu settings = new JMenu("Settings");
+		final JMenu settings = new JMenu("Settings");
 		settings.setMnemonic(KeyEvent.VK_S);
 		final JCheckBoxMenuItem events = new JCheckBoxMenuItem("Music");
 		events.setSelected(true);
 		events.addActionListener(new ActionListener(){
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(final ActionEvent arg0) {
 				sound = events.isSelected();
 				
 			}
@@ -160,9 +154,12 @@ public class GUI {
 		sound_effects.setSelected(true);
 		sound_effects.addActionListener(new ActionListener(){
 
+			/**
+			 * The override of the actionPerformed
+			 */
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				my_sound_effects = sound_effects.isSelected();
+			public void actionPerformed(final ActionEvent arg0) {
+				effects = sound_effects.isSelected();
 				
 			}
 			
